@@ -20,22 +20,47 @@ namespace WakeOnLan.Controllers
         }
 
         [HttpGet]
-        public IList<Device> Get()
+        public ActionResult<IList<Device>> Get()
         {
             IList<Device> deviceList = _configService.GetAllDevices();
-            return deviceList;
+            return new ActionResult<IList<Device>>(deviceList);
         }
 
         [HttpGet("{id:int}")]
-        public Device GetDeviceById(int id)
+        public ActionResult<Device> GetDeviceById(int id)
         {
-            return _configService.GetDeviceById(id);
+            try
+            {
+                Device device = _configService.GetDeviceById(id);
+                if (device == null)
+                {
+                    return NotFound();
+                }
+                return device;
+            }
+            catch (System.Exception)
+            {
+                return NotFound();
+            }
         }
 
         [HttpGet("{name}")]
-        public Device GetDeviceByName(string name)
+        public ActionResult<Device> GetDeviceByName(string name)
         {
-            return _configService.GetDeviceByName(name);
+            try
+            {
+                Device device = _configService.GetDeviceByName(name);
+
+                if (device == null)
+                {
+                    return NotFound();
+                }
+                return device;
+            }
+            catch (System.Exception)
+            {
+                return NotFound();
+            }
         }
     }
 }
