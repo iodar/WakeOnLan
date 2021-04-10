@@ -1,0 +1,14 @@
+{
+    "devices": [
+        {
+            "id": 0,
+            "name": "nas",
+            "mac": "012A212F223FE223"
+        },
+        {
+            "id": 1,
+            "name": "home-server",
+            "mac": "012322AB3232EF"
+        }
+    ]
+}
