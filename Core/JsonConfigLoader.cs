@@ -14,11 +14,6 @@ namespace WakeOnLan.Core
             return BuildObjectFromString(configFileContent);
         }
 
-        public string GetConfigContent()
-        {
-            return GetConfigAsString(LoadConfig());
-        }
-
         private string GetConfigAsString(DeviceList devices)
         {
             return JsonConvert.SerializeObject(devices);
