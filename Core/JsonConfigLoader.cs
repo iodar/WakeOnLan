@@ -28,5 +28,17 @@ namespace WakeOnLan.Core
         {
             return JsonConvert.DeserializeObject<DeviceList>(configAsString);
         }
+
+        public void UpdateAndReloadConfig(DeviceList devices)
+        {
+            WriteUpdatedConfigFile(devices);
+            LoadConfig();
+        }
+
+        private void WriteUpdatedConfigFile(DeviceList updatedDevices)
+        {
+            string devicesAsJsonString = JsonConvert.SerializeObject(updatedDevices);
+            File.WriteAllText(configPath, devicesAsJsonString, Encoding.UTF8);
+        }
     }
 }
