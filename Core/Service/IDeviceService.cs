@@ -3,7 +3,7 @@ using WakeOnLan.Model;
 
 namespace WakeOnLan.Core.Service
 {
-    public interface IConfigService
+    public interface IDeviceService
     {
         IList<Device> GetAllDevices();
 
