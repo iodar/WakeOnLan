@@ -4,7 +4,7 @@ namespace WakeOnLan.Core
 {
     public interface IConfigLoader
     {
-        DeviceList LoadConfig();
+        DeviceList GetConfig();
 
         void UpdateAndReloadConfig(DeviceList devices);
     }
