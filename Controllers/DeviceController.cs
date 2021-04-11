@@ -7,26 +7,26 @@ using WakeOnLan.Model;
 namespace WakeOnLan.Controllers
 {
     [ApiController]
-    [Route("devicelist")]
-    public class DeviceListController : ControllerBase
+    [Route("")]
+    public class DeviceController : ControllerBase
     {
-        private readonly ILogger<DeviceListController> _logger;
-        private readonly IConfigService _configService;
+        private readonly ILogger<DeviceController> _logger;
+        private readonly IDeviceService _configService;
 
-        public DeviceListController(ILogger<DeviceListController> logger)
+        public DeviceController(ILogger<DeviceController> logger)
         {
             _logger = logger;
-            _configService = new ConfigService();
+            _configService = new DeviceService();
         }
 
-        [HttpGet]
+        [HttpGet("/devices")]
         public ActionResult<IList<Device>> Get()
         {
             IList<Device> deviceList = _configService.GetAllDevices();
             return new ActionResult<IList<Device>>(deviceList);
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("/device/{id:int}")]
         public ActionResult<Device> GetDeviceById(int id)
         {
             try
@@ -44,7 +44,7 @@ namespace WakeOnLan.Controllers
             }
         }
 
-        [HttpGet("{name}")]
+        [HttpGet("/device/{name}")]
         public ActionResult<Device> GetDeviceByName(string name)
         {
             try
