@@ -8,10 +8,12 @@ namespace WakeOnLan.Core
     public class JsonConfigLoader : IConfigLoader
     {
         private const string configPath = @"Config/devices.json";
-        public DeviceList LoadConfig()
+        private DeviceList devices;
+
+        private void LoadConfig()
         {
             string configFileContent = LoadConfigFileFromHardDrive();
-            return BuildObjectFromString(configFileContent);
+            devices = BuildObjectFromString(configFileContent);
         }
 
         private string GetConfigAsString(DeviceList devices)
@@ -39,6 +41,15 @@ namespace WakeOnLan.Core
         {
             string devicesAsJsonString = JsonConvert.SerializeObject(updatedDevices);
             File.WriteAllText(configPath, devicesAsJsonString, Encoding.UTF8);
+        }
+
+        public DeviceList GetConfig()
+        {
+            if (devices == null)
+            {
+                LoadConfig();
+            }
+            return devices;
         }
     }
 }
